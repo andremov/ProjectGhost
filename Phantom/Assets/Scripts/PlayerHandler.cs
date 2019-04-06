@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerHandler : MonoBehaviour
 {
     public float moveSpeed;
-    public float rotateSpeed;
+    //public float rotateSpeed;
     public bool viewLock = false;
     public bool canToggleViewLock = true;
 
@@ -45,7 +45,7 @@ public class PlayerHandler : MonoBehaviour
         Vector3 moveVelocity = moveInput.normalized * moveSpeed;
         shell.Move(moveVelocity);
 
-        shell.LookAt(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        shell.LookAt(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         /*
         if (!viewLock) {
