@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\EntityActionsInterface.cs" />
     <Compile Include="Assets\Scripts\EntityController.cs" />
     <Compile Include="Assets\Scripts\GhostActions.cs" />
+    <Compile Include="Assets\Scripts\HumanActions.cs" />
     <Compile Include="Assets\Scripts\PlayerHandler.cs" />
     <Compile Include="Assets\Scripts\Wall.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">

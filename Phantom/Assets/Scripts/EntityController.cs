@@ -4,19 +4,45 @@ using UnityEngine;
 
 public class EntityController : MonoBehaviour
 {
+    bool controlled;
+    public bool Controlled {
+        get {
+            return controlled;
+        }
+        set
+        {
+            if (!value)
+            {
+                velocity = Vector3.zero;
+            }
+            controlled = value;
+        }
+    }
+    EntityActionsInterface eai;
+    public EntityActionsInterface EntityActions
+    {
+        get
+        {
+            return eai;
+        }
+        private set
+        {
+            eai = value;
+        }
+    }
+
     [HideInInspector]
-    public EntityActionsInterface eai;
+    public GameObject ghostForm;
+
     Rigidbody rb;
     Vector3 velocity;
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         eai = GetComponent<EntityActionsInterface>();
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
 
@@ -27,15 +53,13 @@ public class EntityController : MonoBehaviour
         velocity = vel;
     }
 
-    public void LookAt(float horz, float vert)
+    public void LookAt(Vector3 point)
     {
-        Vector3 heightCorrectedPoint = new Vector3(transform.position.x+horz, transform.position.y, transform.position.z+vert);
-        transform.LookAt(heightCorrectedPoint);
+        transform.LookAt(point);
     }
 
     void FixedUpdate()
     {
         rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
-
     }
 }

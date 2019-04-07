@@ -4,27 +4,65 @@ using UnityEngine;
 
 public class GhostActions : EntityActionsInterface
 {
-    public override void OnButtonPress()
-    {
 
-        gameObject.layer = 12;
-    }
+    EntityController ent;
 
-    public override void OnButtonRelease()
-    {
-
-        gameObject.layer = 11;
-    }
-
-    // Start is called before the first frame update
     void Start()
     {
+        ent = GetComponent<EntityController>();
+    }
+
+    void Update()
+    {
+
+    }
+
+    public override void OnButtonPress(int buttonId)
+    {
+        if (buttonId == 1)
+        {
+            GoGhost(true);
+        }
+
+        if (buttonId == 2)
+        {
+            Capture();
+        }
+    }
+
+    public override void OnButtonRelease(int buttonId)
+    {
+
+        if (buttonId == 1)
+        {
+            GoGhost(false);
+        }
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Capture()
     {
-        
+        if (Physics.SphereCast(transform.position, 1f, transform.forward, out RaycastHit hit, 5))
+        {
+            EntityController newShell = hit.collider.gameObject.GetComponent<EntityController>();
+            if (newShell != null)
+            {
+                if (FindObjectOfType<PlayerHandler>().CanSwapShells)
+                {
+                    ent.Controlled = false;
+                    newShell.Controlled = true;
+
+                    FindObjectOfType<PlayerHandler>().Shell = newShell;
+                    newShell.ghostForm = gameObject;
+                    
+                    gameObject.SetActive(false);
+                }
+            }
+        }
+    }
+
+    void GoGhost(bool state)
+    {
+        gameObject.layer = state? 12 : 11;
     }
 }
