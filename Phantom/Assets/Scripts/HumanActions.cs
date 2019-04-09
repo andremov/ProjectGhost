@@ -35,6 +35,7 @@ public class HumanActions : EntityActionsInterface
     {
         if (FindObjectOfType<PlayerHandler>().CanSwapShells)
         {
+            /*
             GameObject ghost = GetComponent<EntityController>().ghostForm;
 
             ghost.SetActive(true);
@@ -47,6 +48,10 @@ public class HumanActions : EntityActionsInterface
 
             ent.Controlled = false;
             ghostEnt.Controlled = true;
+            */
+
+            FindObjectOfType<PlayerHandler>().Shell = null;
+
         }
     }
 }

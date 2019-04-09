@@ -31,9 +31,11 @@ public class EntityController : MonoBehaviour
         }
     }
 
+    /*
     [HideInInspector]
     public GameObject ghostForm;
-
+    */
+    
     Rigidbody rb;
     Vector3 velocity;
 

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,8 +15,15 @@ public class PlayerHandler : MonoBehaviour
     public EntityController Shell {
         set
         {
-            shell = value;
-            StartCoroutine(DoSwapCooldown());
+            if (value == null)
+            {
+                CreateGhostForm();
+            }
+            else
+            {
+                shell = value;
+                StartCoroutine(DoSwapCooldown());
+            }
         }
         private get
         {
@@ -39,15 +46,19 @@ public class PlayerHandler : MonoBehaviour
     }
 
 
-
     void Start()
     {
         if (Shell == null)
         {
-            Shell = Instantiate(ghostPrefab, transform.position, transform.rotation).GetComponent<EntityController>();
+            CreateGhostForm();
         }
     }
-    
+
+    void CreateGhostForm()
+    {
+        Shell = Instantiate(ghostPrefab, transform.position, transform.rotation).GetComponent<EntityController>();
+    }
+
     void Update()
     {
         if (Input.GetAxis("Fire1")!=0)

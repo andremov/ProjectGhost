@@ -53,9 +53,12 @@ public class GhostActions : EntityActionsInterface
                     newShell.Controlled = true;
 
                     FindObjectOfType<PlayerHandler>().Shell = newShell;
+                    /*
                     newShell.ghostForm = gameObject;
                     
                     gameObject.SetActive(false);
+                    */
+                    Destroy(gameObject);
                 }
             }
         }
