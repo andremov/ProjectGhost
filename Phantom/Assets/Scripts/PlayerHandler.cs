@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -45,6 +45,8 @@ public class PlayerHandler : MonoBehaviour
         }
     }
 
+    public float value = 1f;
+    public HealthInterface healthUI;
 
     void Start()
     {
@@ -61,6 +63,10 @@ public class PlayerHandler : MonoBehaviour
 
     void Update()
     {
+
+        value -= 0.01f * Time.deltaTime;
+        healthUI.DisplayedHealth = value;
+
         if (Input.GetAxis("Fire1")!=0)
         {
             Shell.EntityActions.OnButtonPress(1);
